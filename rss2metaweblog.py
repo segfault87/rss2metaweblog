@@ -123,8 +123,11 @@ def do_loop():
                     newpost['description'] = j.content[0].value
                 except:
                     newpost['description'] = j.summary
+
+                if conf['preferences'].has_key('postfix'):
+                    newpost['description'] += conf['preferences']['postfix'].replace('{link}', j.link)
                     
-                    posts.append(newpost)
+                posts.append(newpost)
 
             guids[cid] = nlist
         except Exception, e:
